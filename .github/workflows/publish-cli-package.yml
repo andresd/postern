@@ -17,7 +17,7 @@ jobs:
       - name: Read node from package.json
         uses: culshaw/read-package-node-version-actions@v1
         with:
-          path: "./packages/cli/src/package.json"
+          path: "./packages/cli/src"
         id: package-node-version
       - run: yarn
       - run: yarn cli-publish --new-version ${{ steps.package-version.outputs.version }}"
