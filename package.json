@@ -5,11 +5,13 @@
     "lerna": "^4.0.0"
   },
   "scripts": {
-    "start-cli": "lerna exec --scope @postern/cli -- yarn start",
-    "start-client": "lerna exec --scope @postern/client -- yarn start",
-    "build": "lerna bootstrap & lerna run build",
     "bootstrap": "lerna bootstrap",
-    "test": "lerna run test"
+    "build": "lerna bootstrap & lerna run build",
+    "cli-start": "lerna exec --scope @postern/cli -- yarn start",
+    "cli-test": "lerna exec --scope @postern/cli -- yarn test",
+    "cli-publish": "lerna exec --scope @postern/cli -- yarn publish",
+    "engine-test": "lerna exec --scope @postern/engine -- yarn test",
+    "engine-publish": "lerna exec --scope @postern/engine -- yarn publish"
   },
   "dependencies": {
     "assert": "^2.0.0",

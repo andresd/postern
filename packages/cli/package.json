@@ -13,7 +13,9 @@
   },
   "scripts": {
     "start": "nodemon --exec ts-node -T index.ts ../../../endpoints.yaml",
-    "debug": "nodemon --inspect src/index.ts"
+    "debug": "nodemon --inspect src/index.ts",
+    "publish": "yarn publish",
+    "test": "echo \"Error: no test specified\" && exit 0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
