@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable"
+    ],
+    "module": "commonjs",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "noImplicitAny": false,
+    "noEmit": true,
+    "sourceMap": true,
+    "baseUrl": ".",
+    "outDir": "dist",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "strict": true,
+    "downlevelIteration": true,
+    "forceConsistentCasingInFileNames": true,
+    "incremental": true,
+    "allowSyntheticDefaultImports": true,
+    "isolatedModules": true,
+    "jsx": "react",
+    "typeRoots": [ "./types", "./node_modules/@types"],
+    "paths": {
+      "@postern/core": ["../core/src/index.ts"],
+      "@postern/engine/*": ["../engine/src/index.ts"],
+      "*": ["node_modules/*"]
+    }
+  },
+  "include": [
+    "types/**/*.ts",
+    "**/*.ts",
+    "**/*.tsx"
+ ],
+  "exclude": ["node_modules", "typings", ".history", "types"]
+}

@@ -1,0 +1,36 @@
+{
+  "name": "@postern/cli",
+  "productName": "Postern cli",
+  "version": "1.0.0",
+  "description": "Postern Mock API Tool cli for testing",
+  "main": "index.ts",
+  "author": {
+    "name": "Andres Denkberg"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=16"
+  },
+  "scripts": {
+    "start": "nodemon --exec ts-node -T index.ts ../../../endpoints.yaml",
+    "debug": "nodemon --inspect src/index.ts"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.13",
+    "@types/node": "^17.0.33",
+    "@typescript-eslint/eslint-plugin": "^5.23.0",
+    "@typescript-eslint/parser": "^5.23.0",
+    "eslint": "^8.15.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.4"
+  },
+  "dependencies": {
+    "@postern/engine": "file:../engine",
+    "@postern/core": "file:../core"
+  }
+}
