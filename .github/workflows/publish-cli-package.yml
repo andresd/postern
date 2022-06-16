@@ -20,6 +20,6 @@ jobs:
           path: "./packages/cli/src/package.json"
         id: package-node-version
       - run: yarn
-      - run: yarn cli-publish --new-version ${{ steps.package-version.outputs.version }}" --access public
+      - run: yarn cli-publish --new-version ${{ steps.package-version.outputs.version }}"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

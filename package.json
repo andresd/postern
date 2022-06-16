@@ -9,9 +9,9 @@
     "build": "lerna bootstrap & lerna run build",
     "cli-start": "lerna exec --scope @postern/cli -- yarn start",
     "cli-test": "lerna exec --scope @postern/cli -- yarn test",
-    "cli-publish": "lerna exec --scope @postern/cli -- yarn publish",
+    "cli-publish": "lerna exec --scope @postern/cli -- yarn publish-cli",
     "engine-test": "lerna exec --scope @postern/engine -- yarn test",
-    "engine-publish": "lerna exec --scope @postern/engine -- yarn publish"
+    "engine-publish": "lerna exec --scope @postern/engine -- yarn publish-engine"
   },
   "dependencies": {
     "assert": "^2.0.0",
