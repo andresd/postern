@@ -6,6 +6,7 @@
   },
   "scripts": {
     "start-cli": "lerna exec --scope @postern/cli -- yarn start",
+    "start-client": "lerna exec --scope @postern/client -- yarn start",
     "build": "lerna bootstrap & lerna run build",
     "bootstrap": "lerna bootstrap",
     "test": "lerna run test"
