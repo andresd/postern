@@ -1,6 +1,6 @@
 {
   "name": "@postern/root",
-  "private": true,
+  "private": false,
   "devDependencies": {
     "lerna": "^4.0.0"
   },
