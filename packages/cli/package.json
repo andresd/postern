@@ -3,6 +3,7 @@
   "productName": "Postern cli",
   "version": "1.0.0",
   "description": "Postern Mock API Tool cli for testing",
+  "private": false,
   "main": "index.ts",
   "author": {
     "name": "Andres Denkberg"
