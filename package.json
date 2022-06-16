@@ -1,0 +1,18 @@
+{
+  "name": "@postern/root",
+  "private": true,
+  "devDependencies": {
+    "lerna": "^4.0.0"
+  },
+  "scripts": {
+    "start-cli": "lerna exec --scope @postern/cli -- yarn start",
+    "build": "lerna bootstrap & lerna run build",
+    "bootstrap": "lerna bootstrap",
+    "test": "lerna run test"
+  },
+  "dependencies": {
+    "assert": "^2.0.0",
+    "stream-http": "^3.2.0",
+    "url": "^0.11.0"
+  }
+}

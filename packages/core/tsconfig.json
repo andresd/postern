@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable"
+    ],
+    "module": "commonjs",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "noImplicitAny": false,
+    "sourceMap": true,
+    "baseUrl": ".",
+    "outDir": "dist",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "strict": true,
+    "downlevelIteration": true,
+    "forceConsistentCasingInFileNames": true,
+    "incremental": true,
+    "allowSyntheticDefaultImports": true,
+    "isolatedModules": true,
+    "jsx": "react",
+    "typeRoots": [ "./types", "./node_modules/@types"],
+    "paths": {
+      "@lib/*": ["src/lib/*"],
+      "@config/*": ["src/lib/config/*"],
+      "@types/*": ["src/lib/types/*"]
+    }
+  },
+  "include": ["src/**/*", "../engine/src/countries.ts"]
+}
