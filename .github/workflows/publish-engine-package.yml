@@ -14,7 +14,12 @@ jobs:
           registry-url: https://registry.npmjs.org/
           # Defaults to the user or organization that owns the workflow file
           scope: '@postern'
+      - name: Read node from package.json
+        uses: culshaw/read-package-node-version-actions@v1
+        with:
+          path: "./packages/engine/src/package.json"
+        id: package-node-version
       - run: yarn
-      - run: yarn engine-publish
+      - run: yarn engine-publish --new-version ${{ steps.package-version.outputs.version }}"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.npm_token }}
