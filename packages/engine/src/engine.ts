@@ -3,20 +3,8 @@ import http from 'http'
 import cors from 'cors'
 import url from 'url'
 import { match } from 'node-match-path'
-import { chalky, getEndpoints, methodColor, terminal } from '@postern/core'
+import { chalky, getEndpoints, getForwardProxy, getServerPort, methodColor, terminal } from '@postern/core'
 import { generateBody } from './templateManager'
-
-let port = 3004
-
-export const setPort = (portValue: number) => {
-  port = portValue
-}
-
-let redirectBaseUrl: string | null = null
-
-export const setRedirectBaseUrl = (baseUrl: string) => {
-  redirectBaseUrl = baseUrl
-}
 
 const app = express()
 
@@ -48,6 +36,7 @@ app.all(/.*/, (req, res) => {
   try {
     let processed = false
 
+    const forwardProxy = getForwardProxy()
     const endpoints = getEndpoints()
     endpoints
       .filter(endpoint => {
@@ -112,9 +101,9 @@ app.all(/.*/, (req, res) => {
       })
 
     if (!processed) {
-      if (redirectBaseUrl) {
+      if (forwardProxy) {
 
-        const redirectTo = redirectBaseUrl.replace(/\/+$/, '') + req.originalUrl
+        const redirectTo = forwardProxy.replace(/\/+$/, '') + req.originalUrl
         console.log('REDIRECTo', redirectTo)
         terminal.info(colors.redirect('ENDPOINT NOT FOUND, REDIRECTING TO: '), colors[req.method](req.method), ' ', redirectTo)
         res.redirect(307, redirectTo)
@@ -134,6 +123,7 @@ app.all(/.*/, (req, res) => {
 let server: http.Server
 
 export const startServer = () => {
+  const port = getServerPort()
   server = app.listen(port, () => {
     const message = `Server listening on port ${port} `
     terminal.info(message)

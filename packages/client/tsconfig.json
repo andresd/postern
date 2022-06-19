@@ -1,0 +1,41 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "module": "commonjs",
+    "lib": [
+      "DOM",
+      "es2021"
+    ],
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "noImplicitAny": false,
+    "sourceMap": true,
+    "baseUrl": ".",
+    "outDir": "dist",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "strict": true,
+    "downlevelIteration": true,
+    "forceConsistentCasingInFileNames": true,
+    "incremental": true,
+    "allowSyntheticDefaultImports": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "typeRoots": [ "./types", "./node_modules/@types"],
+    "paths": {
+      "@components/*": ["src/client/components/*"],
+      "@views/*": ["src/client/views/*"],
+      "@pages/*": ["src/client/pages/*"],
+      "@styles/*": ["src/client/styles/*"],
+      "@lib/*": ["src/lib/*"],
+      "@state/*": ["src/state/*"],
+      "@assets/*": ["src/assets/*"],
+      "@config/*": ["src/lib/config/*"],
+      "@types/*": ["src/lib/types/*"],
+      "@postern/engine": ["../engine/src/index.ts"],
+      "@postern/core": ["../core/src/index.ts"],
+      "*": ["node_modules/*"],
+    }
+  },
+  "include": ["src/**/*"]
+}

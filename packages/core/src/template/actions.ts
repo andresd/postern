@@ -1,10 +1,17 @@
-import { EndPoint, EntityWithId, Response } from './types'
+import { EndPoint, EntityWithId, MockServer, Response } from './types'
 import YAML from 'yaml'
 
 // eslint-disable-next-line prefer-const
 let endpointsStorage: EndPoint[] = []
+let serverPort: number | undefined = undefined
+let forwardProxy: string | undefined = undefined
 
-// const store = new Store()
+export const getServerPort = () => serverPort
+export const setServerPort = (port: number) => { serverPort = port }
+
+export const getForwardProxy = () => forwardProxy
+export const setForwardingProxy = (proxy: string | undefined) => { forwardProxy = proxy }
+
 
 const getNewId = (items: EntityWithId[]) => {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -71,17 +78,18 @@ export const setEndpoint = (endpoint: EndPoint): EndPoint => {
   return endpoint
 }
 
-export const importFromYaml = (yaml: string, storage: EndPoint[] = endpointsStorage): EndPoint[] => {
-  const endpoints = YAML.parse(yaml) as EndPoint[]
-  storage = []
-  endpoints.forEach((endpoint) => {
-    addEndpoint(endpoint, storage)
+export const importFromYaml = (yaml: string, storage: EndPoint[] = endpointsStorage): MockServer => {
+  const mockServer = YAML.parse(yaml) as MockServer
+  endpointsStorage = []
+  mockServer.endpoints.forEach((endpoint) => {
+    addEndpoint(endpoint, endpointsStorage)
   })
-  return storage
+  return { endpoints: endpointsStorage, port: mockServer.port, forwardProxy: mockServer.forwardProxy }
 }
 
-export const exportToYaml = (endpoints: EndPoint[] = endpointsStorage) => {
-  return YAML.stringify(endpoints)
+export const exportToYaml = (endpoints: EndPoint[] = endpointsStorage, port?: number, proxy?: string) => {
+  const mockServer: MockServer = { endpoints: endpoints, port: serverPort ?? port, forwardProxy: forwardProxy ?? proxy }
+  return YAML.stringify(mockServer)
 }
 
 export const createEmptyResponse = (endpoint: EndPoint): Response => {
