@@ -1,6 +1,7 @@
 {
   "name": "@postern/core",
   "version": "0.0.1",
+  "private": false,
   "main": "src/index.ts",
   "author": {
     "name": "Andres Denkberg"

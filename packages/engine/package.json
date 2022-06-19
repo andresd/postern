@@ -1,5 +1,8 @@
 {
   "name": "@postern/engine",
+  "productName": "Postern Engine",
+  "description": "Postern Engine Server",
+  "private": false,
   "version": "0.0.1",
   "main": "src/index.ts",
   "author": {
@@ -11,7 +14,9 @@
   },
   "scripts": {
     "start": "nodemon --exec ts-node -T src/index.ts ../../../endpoints.yaml",
-    "debug": "nodemon --inspect src/index.ts"
+    "debug": "nodemon --inspect src/index.ts",
+    "publish-engine": "yarn publish --access public",
+    "test": "echo \"Error: no test specified\" && exit 0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
