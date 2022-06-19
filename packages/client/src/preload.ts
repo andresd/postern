@@ -5,8 +5,8 @@ contextBridge.exposeInMainWorld('server', {
   setEndpoints: (endpoints: EndPoint[]) => ipcRenderer.invoke('setEndpoints', endpoints),
   setSessions: (sessions: Session[]) => ipcRenderer.invoke('setSessions', sessions),
   restart: () => ipcRenderer.invoke('restart'),
-  setPort: async (port: number) => ipcRenderer.invoke('setPort', port),
-  setRedirectBaseUrl: async (redirectBaseUrl: string) => ipcRenderer.invoke('setRedirectBaseUrl', redirectBaseUrl)
+  setServerPort: async (port: number) => ipcRenderer.invoke('setServerPort', port),
+  setForwardingProxy: async (forwardingProxy: string) => ipcRenderer.invoke('setForwardingProxy', forwardingProxy)
 })
 
 contextBridge.exposeInMainWorld('client', {

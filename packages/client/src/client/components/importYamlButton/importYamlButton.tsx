@@ -1,7 +1,7 @@
 import React, { HTMLAttributes, useRef } from 'react'
 import { endpointListState } from '@lib/templates/atoms'
 import { useSetRecoilState } from 'recoil'
-import { importFromYaml, saveInStorage } from '@postern/core'
+import { importFromYaml, saveInStorage, setForwardingProxy, setServerPort } from '@postern/core'
 
 // const fs: any = window.require('fs')
 
@@ -20,8 +20,10 @@ export const ImportYamlButton = (props: ImportYamlButtonProps) => {
     reader.onload = (ev) => {
       try {
         const text = (ev.target?.result) as string
-        const endpoints = importFromYaml(text)
-        setEndpoints(endpoints)
+        const mockServer = importFromYaml(text)
+        setServerPort(mockServer.port ?? 3004)
+        setForwardingProxy(mockServer.forwardProxy)
+        setEndpoints(mockServer.endpoints)
         saveInStorage()
       } catch (e) {
         console.error(e)

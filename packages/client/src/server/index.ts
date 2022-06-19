@@ -1,6 +1,6 @@
 import { ipcMain, IpcMainInvokeEvent } from 'electron'
-import { setPort, setRedirectBaseUrl, reStartServer } from '@postern/engine'
-import { setEndpoints, EndPoint } from '@postern/core'
+import { reStartServer } from '@postern/engine'
+import { setEndpoints, setServerPort, setForwardingProxy, EndPoint } from '@postern/core'
 
 ipcMain.handle('setEndpoints', (_event: IpcMainInvokeEvent, endpoints: EndPoint[]) => {
   setEndpoints(endpoints)
@@ -10,13 +10,13 @@ ipcMain.handle('restart', () => {
   reStartServer()
 })
 
-ipcMain.handle('setPort', (_event: IpcMainInvokeEvent, portValue: number) => {
-  setPort(portValue)
+ipcMain.handle('setServerPort', (_event: IpcMainInvokeEvent, portValue: number) => {
+  setServerPort(portValue)
   reStartServer()
 })
 
-ipcMain.handle('setRedirectBaseUrl', (_event: IpcMainInvokeEvent, redirectBaseUrl: string) => {
-  setRedirectBaseUrl(redirectBaseUrl)
+ipcMain.handle('setForwardingProxy', (_event: IpcMainInvokeEvent, forwardingProxy: string) => {
+  setForwardingProxy(forwardingProxy)
   reStartServer()
 })
 

@@ -8,7 +8,7 @@ export const serverPortState = atom<number>({
       const port = window.localStorage.getItem('serverPort')
       const portValue = parseInt(port ?? '3004', 10)
       // @ts-ignore
-      window.server.setPort(portValue)
+      window.server.setServerPort(portValue)
       return portValue
     }
   }),
@@ -16,21 +16,21 @@ export const serverPortState = atom<number>({
     ({ onSet }) => {
       onSet(async (port) => {
         // @ts-ignore
-        await window.server.setPort(port)
+        await window.server.setServerPort(port)
         window.localStorage.setItem('serverPort', port.toString())
       })
     }
   ]
 })
 
-export const redirectBaseUrlState = atom<string | null>({
-  key: 'redirectBaseUrl',
+export const forwardingProxyState = atom<string | null>({
+  key: 'forwardingProxy',
   default: selector<string | null>({
-    key: 'redirectBaseUrl/default',
+    key: 'forwardingProxy/default',
     get: () => {
-      const url = window.localStorage.getItem('redirectBaseUrl')
+      const url = window.localStorage.getItem('forwardingProxy')
       // @ts-ignore
-      window.server.setRedirectBaseUrl(url)
+      window.server.setForwardingProxy(url)
       return url
     }
   }),
@@ -38,8 +38,8 @@ export const redirectBaseUrlState = atom<string | null>({
     ({ onSet }) => {
       onSet(async (url) => {
         // @ts-ignore
-        await window.server.setRedirectBaseUrl(url)
-        window.localStorage.setItem('redirectBaseUrl', url ?? '')
+        await window.server.setForwardingProxy(url)
+        window.localStorage.setItem('forwardingProxy', url ?? '')
       })
     }
   ]

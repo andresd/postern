@@ -43,3 +43,9 @@ export interface Response extends EntityWithId {
 }
 
 export type EndpointWithResponse = { endpointId: number, responseId: number } & Omit<EndPoint, 'responses' | 'id'> & Omit<Response, 'id' | 'endpointId'>
+
+export interface MockServer {
+  endpoints: EndPoint[]
+  port?: number
+  forwardProxy?: string
+}

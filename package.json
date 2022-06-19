@@ -1,6 +1,11 @@
 {
   "name": "@postern/root",
   "private": true,
+  "workspaces": [
+    "packages/core",
+    "packages/engine",
+    "packages/cli"
+  ],
   "devDependencies": {
     "lerna": "^4.0.0"
   },

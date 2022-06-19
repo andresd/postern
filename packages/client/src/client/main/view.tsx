@@ -13,7 +13,7 @@ import { useSetRecoilState } from 'recoil'
 import { splitSizeChangedState } from '@lib/client/atoms'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import { DndProvider } from 'react-dnd'
-import { RedirectBaseUrlInput } from '@components/redirectBaseUrlInput'
+import { ForwardingProxyInput } from '@components/forwardingProxyInput'
 
 export const View = () => {
   const setSplitSizeChanged = useSetRecoilState(splitSizeChangedState)
@@ -31,7 +31,7 @@ export const View = () => {
           <ExportYamlButton className={styles.topButton} />
           <PortInput className={styles.topItem} />
           <TestEndpointButton className={styles.topButton} />
-          <RedirectBaseUrlInput className={styles.topItem2} />
+          <ForwardingProxyInput className={styles.topItem2} />
         </div>
         <div className={styles.main}>
           <Split className={styles.splitVertical} direction='vertical' gutterSize={5} sizes={[50, 50]} minSize={[17, 17]} onDragEnd={(sizes) => handleDragEnd(sizes)}>
