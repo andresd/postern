@@ -3,7 +3,7 @@
   "productName": "Postern Engine",
   "description": "Postern Engine Server",
   "private": false,
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": {
     "name": "Andres Denkberg"
   },
@@ -14,7 +14,7 @@
   "main": "./dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "rm -rf dist && tsc",
+    "build": "yarn && rm -rf dist && tsc",
     "bump": "yarn version --patch",
     "publish-engine": "yarn publish --access public",
     "test": "echo \"Error: no test specified\" && exit 0"
