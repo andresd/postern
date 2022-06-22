@@ -3,7 +3,7 @@
   "productName": "Postern Engine",
   "description": "Postern Engine Server",
   "private": false,
-  "version": "0.0.7",
+  "version": "0.0.8",
   "author": {
     "name": "Andres Denkberg"
   },
