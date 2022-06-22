@@ -15,7 +15,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "yarn && rm -rf dist && tsc",
-    "bump": "yarn version --patch",
+    "bump": "yarn version --patch --no-git-tag-version",
     "publish-engine": "yarn publish --access public",
     "test": "echo \"Error: no test specified\" && exit 0"
   },

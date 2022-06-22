@@ -1,6 +1,6 @@
 {
   "name": "@postern/core",
-  "version": "0.0.7",
+  "version": "0.0.13",
   "private": false,
   "author": {
     "name": "Andres Denkberg"
@@ -13,7 +13,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "yarn && rm -rf dist && tsc",
-    "bump": "yarn version --patch",
+    "bump": "yarn version --patch --no-git-tag-version",
     "publish-engine": "yarn publish --access public",
     "test": "echo \"Error: no test specified\" && exit 0"
   },

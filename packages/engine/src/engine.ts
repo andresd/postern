@@ -3,18 +3,28 @@ import http from 'http'
 import cors from 'cors'
 import url from 'url'
 import { match } from 'node-match-path'
-import { chalky, getEndpoints, getForwardProxy, getServerPort, methodColor, terminal } from '@postern/core'
+import { chalky, methodColor, MockServer, terminal } from '@postern/core'
 import { generateBody } from './templateManager'
 
 const app = express()
 
 app.use(cors())
 
+let currentServer: MockServer
 const getPrettyJson = (json: string) => {
+
   try {
     const obj = JSON.parse(json)
     return JSON.stringify(obj, null, 2).replaceAll('\\n', '').replaceAll('\\"', '"')
   } catch (e) {
+    return json
+  }
+}
+
+const getSafeJson = (json: string) => {
+  try {
+    return JSON.parse(json)
+  } catch {
     return json
   }
 }
@@ -36,8 +46,9 @@ app.all(/.*/, (req, res) => {
   try {
     let processed = false
 
-    const forwardProxy = getForwardProxy()
-    const endpoints = getEndpoints()
+    const forwardProxy = currentServer.forwardProxy
+    const endpoints = currentServer.endpoints
+
     endpoints
       .filter(endpoint => {
         if (endpoint.method !== req.method) {
@@ -95,7 +106,7 @@ app.all(/.*/, (req, res) => {
 
           terminal.info(`Response: ${getPrettyJson(body)} `)
 
-          res.status(response?.statusCode ?? 200).send(body)
+          res.status(response?.statusCode ?? 200).send(getSafeJson(body))
         }
         processed = true
       })
@@ -104,7 +115,6 @@ app.all(/.*/, (req, res) => {
       if (forwardProxy) {
 
         const redirectTo = forwardProxy.replace(/\/+$/, '') + req.originalUrl
-        console.log('REDIRECTo', redirectTo)
         terminal.info(colors.redirect('ENDPOINT NOT FOUND, REDIRECTING TO: '), colors[req.method](req.method), ' ', redirectTo)
         res.redirect(307, redirectTo)
       } else {
@@ -122,8 +132,9 @@ app.all(/.*/, (req, res) => {
 
 let server: http.Server
 
-export const startServer = () => {
-  const port = getServerPort()
+export const startServer = (mockServer: MockServer) => {
+  currentServer = mockServer
+  const port = currentServer.port
   server = app.listen(port, () => {
     const message = `Server listening on port ${port} `
     terminal.info(message)
@@ -132,6 +143,6 @@ export const startServer = () => {
 
 export const reStartServer = () => {
   server.close(() => {
-    startServer()
+    startServer(currentServer)
   })
 }
