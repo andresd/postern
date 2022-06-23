@@ -1,7 +1,7 @@
 {
   "name": "@postern/cli",
   "productName": "Postern cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Postern Mock API Tool cli for testing",
   "private": false,
   "main": "./src/index.ts",
@@ -37,7 +37,7 @@
     "typescript": "^4.7.4"
   },
   "dependencies": {
-    "@postern/engine": "file:../engine",
-    "@postern/core": "file:../core"
+    "@postern/core": "^0.0.13",
+    "@postern/engine": "^0.0.9"
   }
 }
