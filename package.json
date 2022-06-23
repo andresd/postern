@@ -2,7 +2,6 @@
   "name": "@postern/root",
   "private": true,
   "workspaces": [
-    "packages/webApp",
     "packages/core",
     "packages/engine",
     "packages/cli"
@@ -13,8 +12,6 @@
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "build": "lerna bootstrap & lerna run build",
-    "client-start": "lerna exec --scope @postern/cli -- yarn start",
-    "client-package": "lerna exec --scope @postern/cli -- yarn package",
     "cli-start": "lerna exec --scope @postern/cli -- yarn start",
     "cli-test": "lerna exec --scope @postern/cli -- yarn test",
     "cli-publish": "lerna exec --scope @postern/cli -- yarn publish-cli",
