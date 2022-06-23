@@ -1,39 +1,47 @@
 {
+  "ts-node": {
+    "transpileOnly": true,
+    "moduleTypes": {
+      "webpack.config.ts": "cjs",
+      // Globs are also supported with the same behavior as tsconfig "include"
+      "webpack-config-scripts/**/*": "cjs"
+    },
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
+  },
   "compilerOptions": {
-    "allowJs": true,
+    "target": "es5",
     "lib": [
-      "esnext",
       "dom",
-      "dom.iterable"
+      "dom.iterable",
+      "esnext"
     ],
-    "module": "commonjs",
+    "outDir": "./dist",
+    "baseUrl": ".",
+    "noImplicitAny": false,
+    "downlevelIteration": true,
+    "declaration": true,
+    "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "noImplicitAny": false,
-    "noEmit": true,
-    "sourceMap": true,
-    "baseUrl": ".",
-    "outDir": "dist",
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "ESNext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "strict": true,
-    "downlevelIteration": true,
-    "forceConsistentCasingInFileNames": true,
-    "incremental": true,
-    "allowSyntheticDefaultImports": true,
     "isolatedModules": true,
-    "jsx": "react",
-    "typeRoots": [ "./types", "./node_modules/@types"],
+    "noEmit": false,
+    "jsx": "react-jsx",
     "paths": {
-      "@postern/core": ["../core/src/index.ts"],
-      "@postern/engine/*": ["../engine/src/index.ts"],
-      "*": ["node_modules/*"]
+      "@postern/core": ["../core/src/*"],
+      "@postern/engine": ["../engine/src/*"],
+      "*": ["./node_modules/*"]
     }
   },
   "include": [
-    "types/**/*.ts",
-    "**/*.ts",
-    "**/*.tsx"
- ],
-  "exclude": ["node_modules", "typings", ".history", "types"]
+    "src"
+  ]
 }

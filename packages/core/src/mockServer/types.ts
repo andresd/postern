@@ -15,10 +15,6 @@ export const methodColor = {
 export const httpMethod = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD', 'OPTIONS'] as const
 export type HttpMethod = typeof httpMethod[number]
 
-export interface Session extends EntityWithId {
-  name: string
-}
-
 export interface EndPoint extends EntityWithId {
   name?: string,
   description?: string,
@@ -43,9 +39,3 @@ export interface Response extends EntityWithId {
 }
 
 export type EndpointWithResponse = { endpointId: number, responseId: number } & Omit<EndPoint, 'responses' | 'id'> & Omit<Response, 'id' | 'endpointId'>
-
-export interface MockServer {
-  endpoints: EndPoint[]
-  port?: number
-  forwardProxy?: string
-}

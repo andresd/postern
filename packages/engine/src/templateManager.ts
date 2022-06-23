@@ -77,6 +77,6 @@ export const generateBody = (response?: Response) => {
   }
   const templateStr = JSON.stringify(response.template ?? {})
   const dictionary = response.dictionary
-  const template = Handlebars.compile(templateStr)
+  const template = Handlebars.compile(templateStr, { noEscape: true })
   return template(dictionary)
 }
