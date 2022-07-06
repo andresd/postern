@@ -12,7 +12,6 @@ app.use(cors())
 
 let currentServer: MockServer
 const getPrettyJson = (json: string) => {
-
   try {
     const obj = JSON.parse(json)
     return JSON.stringify(obj, null, 2).replaceAll('\\n', '').replaceAll('\\"', '"')
@@ -39,7 +38,7 @@ const colors = {
   DELETE: (text: string) => chalky.frColor('#fff').bgColor(methodColor.DELETE).toString(text),
   PATCH: (text: string) => chalky.frColor('#fff').bgColor(methodColor.PATCH).toString(text),
   HEAD: (text: string) => chalky.frColor('#fff').bgColor(methodColor.HEAD).toString(text),
-  OPTIONS: (text: string) => chalky.frColor('#fff').bgColor(methodColor.OPTIONS).toString(text),
+  OPTIONS: (text: string) => chalky.frColor('#fff').bgColor(methodColor.OPTIONS).toString(text)
 }
 
 app.all(/.*/, (req, res) => {
@@ -56,7 +55,7 @@ app.all(/.*/, (req, res) => {
         }
 
         // const url = new URL(req.url)
-        // eslint-disable-next-line node/no-deprecated-api
+        // eslint-disable-next-line n/no-deprecated-api
         const pathname = url.parse(req.url).pathname
         const endpointPath = `/api/${endpoint.path[0] === '/' ? endpoint.path.substring(1) : endpoint.path}`
         const pathMatchResult = pathname ? match(endpointPath, pathname) : null
@@ -77,7 +76,7 @@ app.all(/.*/, (req, res) => {
           //
           // Redirect
           let redirectPath = endpoint.redirect
-          // eslint-disable-next-line node/no-deprecated-api
+          // eslint-disable-next-line n/no-deprecated-api
           const pathname = url.parse(req.url).pathname
           const endpointPath = `/ api / ${endpoint.path[0] === '/' ? endpoint.path.substring(1) : endpoint.path} `
           const pathMatchResult = pathname ? match(endpointPath, pathname) : null
@@ -113,7 +112,6 @@ app.all(/.*/, (req, res) => {
 
     if (!processed) {
       if (forwardProxy) {
-
         const redirectTo = forwardProxy.replace(/\/+$/, '') + req.originalUrl
         terminal.info(colors.redirect('ENDPOINT NOT FOUND, REDIRECTING TO: '), colors[req.method](req.method), ' ', redirectTo)
         res.redirect(307, redirectTo)

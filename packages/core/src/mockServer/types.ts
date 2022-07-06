@@ -15,12 +15,18 @@ export const methodColor = {
 export const httpMethod = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD', 'OPTIONS'] as const
 export type HttpMethod = typeof httpMethod[number]
 
+export type RuleOperator = 'equals' | 'contains' | 'regex' | 'null' | 'empty' | 'any'
+export interface Rule extends EntityWithId {
+  type: 'body' | 'querystring' | 'header' | 'param'
+  path: string
+  operator: RuleOperator
+  value: string
+}
 export interface EndPoint extends EntityWithId {
   name?: string,
   description?: string,
   path: string,
   method: HttpMethod,
-  ignoreQueryParams?: boolean,
   redirectEnabled?: boolean,
   redirect?: string,
   reUseQueryStringInRedirect?: boolean,
@@ -31,11 +37,11 @@ export interface Response extends EntityWithId {
   id: number | null,
   endpointId: number | null,
   isActive: boolean,
-  queryParamCondition?: object,
   template?: string,
   dictionary?: object,
   statusCode?: number,
   headers?: { [key: string]: string }
+  rules: Rule[]
 }
 
 export type EndpointWithResponse = { endpointId: number, responseId: number } & Omit<EndPoint, 'responses' | 'id'> & Omit<Response, 'id' | 'endpointId'>

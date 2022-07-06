@@ -1,5 +1,7 @@
-import { EndPoint, EntityWithId, Response } from './types'
+import { match } from 'node-match-path'
+import URL from 'url-parse'
 import YAML from 'yaml'
+import { EndPoint, EntityWithId, HttpMethod, Response } from './types'
 
 const getNewId = (items: EntityWithId[]) => {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -12,7 +14,8 @@ export const createEmptyResponse = (endpoint: EndPoint): Response => {
     id: getNewId(endpoint.responses ?? []),
     statusCode: 200,
     isActive: true,
-    template: 'Successful'
+    template: 'Successful',
+    rules: []
   }
 }
 
@@ -127,5 +130,77 @@ export class MockServer {
   public exportToYaml = () => {
     const mockServer: MockServerData = { endpoints: this._endpointsStorage, port: this._port, forwardProxy: this._forwardProxy }
     return YAML.stringify(mockServer)
+  }
+
+  private ruleCompare = (value: string | null | undefined, rule): boolean => {
+    switch (rule.operator) {
+      case 'any':
+        return true
+      case 'equals':
+        return value === rule.value
+      case 'contains':
+        return (value as string)?.includes(rule.value)
+      case 'regex':
+        return new RegExp(rule.value).test((value as string))
+      case 'null':
+        return value === '' || value === null
+      case 'empty': {
+        const values = (value as string).split(',')
+        return values.length === 0
+      }
+    }
+    return false
+  }
+
+  public findEndpoint = (method: HttpMethod, url: string): EndPoint | null => {
+    const parse = new URL(url, true)
+    const endpoint = this._endpointsStorage
+      .find((endpoint) => {
+        if (endpoint.method !== method) {
+          return undefined
+        }
+        // Validate paths matches
+        const pathname = parse.pathname
+        const endpointPath = `/api/${endpoint.path[0] === '/' ? endpoint.path.substring(1) : endpoint.path}`
+        const pathMatches = match(endpointPath, pathname)
+
+        if (!pathMatches.matches) {
+          return undefined
+        }
+
+        return endpoint
+      })
+    return endpoint ?? null
+  }
+
+  public getValidResponse = (endpoint: EndPoint, url: string, headers: object, body: any): Response | null => {
+    const parse = new URL(url, true)
+
+    const response = endpoint.responses?.find(response => {
+      // Validate paths matches
+      const pathname = parse.pathname
+      const endpointPath = `/api/${endpoint.path[0] === '/' ? endpoint.path.substring(1) : endpoint.path}`
+      const pathMatches = match(endpointPath, pathname)
+
+      // Validate endpoint rules
+      const rulesValid = response.rules.every(rule => {
+        if (rule.type === 'header') {
+          return this.ruleCompare(headers[rule.path], rule)
+        }
+        if (rule.type === 'querystring') {
+          return this.ruleCompare(parse.query[rule.path], rule)
+        }
+        if (rule.type === 'body') {
+          return rule.path ? this.ruleCompare(body[rule.path], rule) : this.ruleCompare(body, rule)
+        }
+        if (rule.type === 'param') {
+          return this.ruleCompare(pathMatches.params?.[rule.path], rule)
+        }
+        return false
+      }, true)
+
+      return rulesValid ? response : undefined
+    })
+    return response ?? null
   }
 }
