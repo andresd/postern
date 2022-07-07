@@ -23,7 +23,6 @@ export interface Rule extends EntityWithId {
   value: string
 }
 export interface EndPoint extends EntityWithId {
-  name?: string,
   description?: string,
   path: string,
   method: HttpMethod,
@@ -34,7 +33,7 @@ export interface EndPoint extends EntityWithId {
 }
 
 export interface Response extends EntityWithId {
-  id: number | null,
+  description?: string,
   endpointId: number | null,
   isActive: boolean,
   template?: string,
