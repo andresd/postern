@@ -1,6 +1,6 @@
 {
   "name": "@postern/core",
-  "version": "0.0.14",
+  "version": "0.0.16",
   "private": false,
   "author": {
     "name": "Andres Denkberg"
@@ -9,7 +9,7 @@
   "engines": {
     "node": ">=16"
   },
-  "main": "./dist/index.js",
+  "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "yarn && rm -rf dist && tsc",

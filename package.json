@@ -16,7 +16,9 @@
     "cli-test": "lerna exec --scope @postern/cli -- yarn test",
     "cli-publish": "lerna exec --scope @postern/cli -- yarn publish-cli",
     "engine-test": "lerna exec --scope @postern/engine -- yarn test",
-    "engine-publish": "lerna exec --scope @postern/engine -- yarn publish-engine"
+    "engine-publish": "lerna exec --scope @postern/engine -- yarn publish-engine",
+    "core-test": "lerna exec --scope @postern/core -- yarn test",
+    "core-publish": "lerna exec --scope @postern/core -- yarn publish-core"
   },
   "dependencies": {
     "assert": "^2.0.0",
