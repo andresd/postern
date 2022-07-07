@@ -51,6 +51,7 @@ describe('MockServer', () => {
       it('should return null when param do not match equal rule', () => {
         newResponse.rules = [
           {
+            enabled: true,
             id: 1,
             type: 'param',
             path: 'id',
@@ -66,6 +67,7 @@ describe('MockServer', () => {
       it('should return response when param match equal rule', () => {
         newResponse.rules = [
           {
+            enabled: true,
             id: 1,
             type: 'param',
             path: 'id',
@@ -82,6 +84,7 @@ describe('MockServer', () => {
       it('should return null when header do not match equal rule', () => {
         newResponse.rules = [
           {
+            enabled: true,
             id: 1,
             type: 'header',
             path: 'Content-Type',
@@ -97,6 +100,7 @@ describe('MockServer', () => {
       it('should return response when header match equal rule', () => {
         newResponse.rules = [
           {
+            enabled: true,
             id: 1,
             type: 'header',
             path: 'Content-Type',
@@ -113,6 +117,7 @@ describe('MockServer', () => {
       it('should return null when qs do not match equal rule', () => {
         newResponse.rules = [
           {
+            enabled: true,
             id: 1,
             type: 'querystring',
             path: 'name',
@@ -128,6 +133,7 @@ describe('MockServer', () => {
       it('should return response when qs match equal rule', () => {
         newResponse.rules = [
           {
+            enabled: true,
             id: 1,
             type: 'querystring',
             path: 'name',
@@ -144,6 +150,7 @@ describe('MockServer', () => {
       it('should return null when body do not match equal rule', () => {
         newResponse.rules = [
           {
+            enabled: true,
             id: 1,
             type: 'body',
             path: 'name',
@@ -159,6 +166,7 @@ describe('MockServer', () => {
       it('should return response when body match equal rule', () => {
         newResponse.rules = [
           {
+            enabled: true,
             id: 1,
             type: 'body',
             path: 'name',
@@ -177,6 +185,7 @@ describe('MockServer', () => {
       it('should return null when param do not match equal rule', () => {
         newResponse.rules = [
           {
+            enabled: true,
             id: 1,
             type: 'param',
             path: 'id',
@@ -192,6 +201,7 @@ describe('MockServer', () => {
       it('should return response when param match equal rule', () => {
         newResponse.rules = [
           {
+            enabled: true,
             id: 1,
             type: 'param',
             path: 'id',
@@ -208,6 +218,7 @@ describe('MockServer', () => {
       it('should return null when header do not match equal rule', () => {
         newResponse.rules = [
           {
+            enabled: true,
             id: 1,
             type: 'header',
             path: 'Content-Type',
@@ -223,6 +234,7 @@ describe('MockServer', () => {
       it('should return response when header match equal rule', () => {
         newResponse.rules = [
           {
+            enabled: true,
             id: 1,
             type: 'header',
             path: 'Content-Type',
@@ -239,6 +251,7 @@ describe('MockServer', () => {
       it('should return null when qs do not match equal rule', () => {
         newResponse.rules = [
           {
+            enabled: true,
             id: 1,
             type: 'querystring',
             path: 'name',
@@ -254,6 +267,7 @@ describe('MockServer', () => {
       it('should return response when qs match equal rule', () => {
         newResponse.rules = [
           {
+            enabled: true,
             id: 1,
             type: 'querystring',
             path: 'name',
@@ -270,6 +284,7 @@ describe('MockServer', () => {
       it('should return null when body do not match equal rule', () => {
         newResponse.rules = [
           {
+            enabled: true,
             id: 1,
             type: 'body',
             path: 'name',
@@ -285,6 +300,7 @@ describe('MockServer', () => {
       it('should return response when body match equal rule', () => {
         newResponse.rules = [
           {
+            enabled: true,
             id: 1,
             type: 'body',
             path: 'name',

@@ -46,7 +46,6 @@ app.all(/.*/, (req, res) => {
     let processed = false
 
     const forwardProxy = currentServer.forwardProxy
-    const endpoints = currentServer.endpoints
 
     const endpoint = currentServer.findEndpoint(req.method as HttpMethod, req.url)
     if (endpoint) {
@@ -77,7 +76,8 @@ app.all(/.*/, (req, res) => {
           terminal.info(colors[req.method](req.method), ' ', req.url)
 
           if (response?.headers) {
-            res.set(response.headers)
+            const headers = Object.fromEntries(Object.entries(response.headers).filter(([, value]) => (value as { enabled: boolean; value: string; })?.enabled))
+            res.set(headers)
           }
           const body = generateBody(response)
 

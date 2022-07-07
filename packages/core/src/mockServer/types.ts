@@ -17,6 +17,7 @@ export type HttpMethod = typeof httpMethod[number]
 
 export type RuleOperator = 'equals' | 'contains' | 'regex' | 'null' | 'empty' | 'any'
 export interface Rule extends EntityWithId {
+  enabled: boolean
   type: 'body' | 'querystring' | 'header' | 'param'
   path: string
   operator: RuleOperator
@@ -32,6 +33,8 @@ export interface EndPoint extends EntityWithId {
   responses?: Response[]
 }
 
+export type HeadersType = { [key: string]: { enabled: boolean, value: string } | string }
+
 export interface Response extends EntityWithId {
   description?: string,
   endpointId: number | null,
@@ -39,7 +42,7 @@ export interface Response extends EntityWithId {
   template?: string,
   dictionary?: object,
   statusCode?: number,
-  headers?: { [key: string]: string }
+  headers?: HeadersType
   rules: Rule[]
 }
 
