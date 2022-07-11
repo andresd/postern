@@ -1,29 +1,29 @@
 
 export const hexToRgb = (hex: string | number) => {
-  const matches = /(?<colorString>[a-f\d]{6}|[a-f\d]{3})/i.exec(hex.toString(16));
+  const matches = /(?<colorString>[a-f\d]{6}|[a-f\d]{3})/i.exec(hex.toString(16))
   if (!matches) {
-    return [0, 0, 0];
+    return [0, 0, 0]
   }
 
   if (!matches.groups) {
     return []
   }
 
-  let { colorString } = matches.groups;
+  let { colorString } = matches.groups
 
   if (colorString.length === 3) {
-    colorString = [...colorString].map(character => character + character).join('');
+    colorString = [...colorString].map(character => character + character).join('')
   }
 
-  const integer = Number.parseInt(colorString, 16);
+  const integer = Number.parseInt(colorString, 16)
 
   return [
     /* eslint-disable no-bitwise */
     (integer >> 16) & 0xFF,
     (integer >> 8) & 0xFF,
-    integer & 0xFF,
+    integer & 0xFF
     /* eslint-enable no-bitwise */
-  ];
+  ]
 }
 
 class Chalky {
@@ -41,7 +41,6 @@ class Chalky {
     return this
   }
 
-
   public bgColor(hex: string) {
     const colorFlag = `\x1b[48;2;${hexToRgb(hex).join(';')}m`
     this._stack.push(colorFlag)
@@ -49,11 +48,6 @@ class Chalky {
   }
 
   public toString(text: string) {
-    const stackSize = this._stack.length
-    // const p1 = this._stack.join('')
-    // const p2 = this._closeFlag.repeat(stackSize)
-    // console.log(p1, text, p2)
-
     const result = [this._stack.join(''), text, this._closeFlag] // .repeat(stackSize)
     this._stack = []
     return result.join('')

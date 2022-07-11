@@ -1,16 +1,19 @@
+import { chalky, HttpMethod, methodColor, MockServer, terminal } from '@postern/core'
+import cors from 'cors'
 import express from 'express'
 import http from 'http'
-import cors from 'cors'
-import url from 'url'
 import { match } from 'node-match-path'
-import { chalky, HttpMethod, methodColor, MockServer, terminal } from '@postern/core'
+import URL from 'url-parse'
 import { generateBody } from './templateManager'
 
 const app = express()
 
 app.use(cors())
+app.use(express.json()) // for parsing application/json
+app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
 let currentServer: MockServer
+
 const getPrettyJson = (json: string) => {
   try {
     const obj = JSON.parse(json)
@@ -28,6 +31,14 @@ const getSafeJson = (json: string) => {
   }
 }
 
+const trimPath = (path: string): string => {
+  return path.replace(/^\/+|\/+$/g, '')
+}
+
+const joinPaths = (...paths: string[]): string => {
+  return '/' + paths.map(path => trimPath(path)).filter(path => path !== '').join('/')
+}
+
 const colors = {
   redirect: (text: string) => chalky.frColor('#FFEB3B').toString(text),
   notFound: (text: string) => chalky.bold().frColor('#F18A5F').toString(text),
@@ -41,7 +52,14 @@ const colors = {
   OPTIONS: (text: string) => chalky.frColor('#fff').bgColor(methodColor.OPTIONS).toString(text)
 }
 
-app.all(/.*/, (req, res) => {
+app.post('/postern/restart', (req, res) => {
+  const oldPort = currentServer.port
+  currentServer.setServerData(req.body?.server)
+  terminal.info(`Server data was updated, will remain in port ${oldPort} until server is updated`)
+  res.status(200).send({ status: true })
+})
+
+app.all(/(?!.*?postern)^.*$/, (req, res) => {
   try {
     let processed = false
 
@@ -53,9 +71,9 @@ app.all(/.*/, (req, res) => {
         //
         // Redirect
         let redirectPath = endpoint.redirect
-        // eslint-disable-next-line n/no-deprecated-api
-        const pathname = url.parse(req.url).pathname
-        const endpointPath = `/ api / ${endpoint.path[0] === '/' ? endpoint.path.substring(1) : endpoint.path} `
+        const parse = new URL(req.url)
+        const pathname = parse.pathname
+        const endpointPath = joinPaths('/', currentServer.prefix ?? '', endpoint.path)
         const pathMatchResult = pathname ? match(endpointPath, pathname) : null
         const params = pathMatchResult?.params
 
@@ -76,8 +94,8 @@ app.all(/.*/, (req, res) => {
           terminal.info(colors[req.method](req.method), ' ', req.url)
 
           if (response?.headers) {
-            const headers = Object.fromEntries(Object.entries(response.headers).filter(([, value]) => (value as { enabled: boolean; value: string; })?.enabled))
-            res.set(headers)
+            const headers = response.headers.filter(header => header.enabled).map(header => [header.key, header.value])
+            res.set(Object.fromEntries(headers))
           }
           const body = generateBody(response)
 
@@ -112,6 +130,8 @@ let server: http.Server
 export const startServer = (mockServer: MockServer) => {
   currentServer = mockServer
   const port = currentServer.port
+  app.disable('x-powered-by')
+  app.disable('etag')
   server = app.listen(port, () => {
     const message = `Server listening on port ${port} `
     terminal.info(message)

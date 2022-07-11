@@ -16,7 +16,8 @@ export const httpMethod = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD', 'OPT
 export type HttpMethod = typeof httpMethod[number]
 
 export type RuleOperator = 'equals' | 'contains' | 'regex' | 'null' | 'empty' | 'any'
-export interface Rule extends EntityWithId {
+
+export interface Rule {
   enabled: boolean
   type: 'body' | 'querystring' | 'header' | 'param'
   path: string
@@ -33,7 +34,11 @@ export interface EndPoint extends EntityWithId {
   responses?: Response[]
 }
 
-export type HeadersType = { [key: string]: { enabled: boolean, value: string } | string }
+export type Header = {
+  key: string
+  enabled: boolean
+  value: string
+}
 
 export interface Response extends EntityWithId {
   description?: string,
@@ -42,7 +47,7 @@ export interface Response extends EntityWithId {
   template?: string,
   dictionary?: object,
   statusCode?: number,
-  headers?: HeadersType
+  headers?: Header[]
   rules: Rule[]
 }
 

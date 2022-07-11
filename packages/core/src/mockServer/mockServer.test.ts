@@ -3,35 +3,36 @@ import { createEmptyEndpoint, createEmptyResponse, MockServer } from './mockServ
 describe('MockServer', () => {
   describe('findEndpoint', () => {
     const mockServer = new MockServer()
+    mockServer.prefix = '/api'
     beforeAll(() => {
       const newEndpoint = createEmptyEndpoint(mockServer.endpoints)
       newEndpoint.method = 'GET'
-      newEndpoint.path = '/user/:id'
+      newEndpoint.path = 'user/:id'
       mockServer.addEndpoint(newEndpoint)
     })
 
     it('should return null when method don\'t match', () => {
-      const result = mockServer.findEndpoint('POST', '/api/user/6?name="the name"')
+      const result = mockServer.findEndpoint('POST', 'http://localhost/api/user/6?name="the name"')
       expect(result).toBeNull()
     })
 
     it('should return null when url don\'t match', () => {
-      const result = mockServer.findEndpoint('GET', '/api/user_other/6?name="the name"')
+      const result = mockServer.findEndpoint('GET', 'http://localhost/api/user_other/6?name="the name"')
       expect(result).toBeNull()
     })
 
     it('should return null when method and url don\'t match', () => {
-      const result = mockServer.findEndpoint('PUT', '/api/user_other?name="the name"')
+      const result = mockServer.findEndpoint('PUT', 'http://localhost/api/user_other?name="the name"')
       expect(result).toBeNull()
     })
 
     it('should return endpoint when method and url matches', () => {
-      const result = mockServer.findEndpoint('GET', '/api/user/88?name="the name"')
+      const result = mockServer.findEndpoint('GET', 'http://localhost/api/user/88?name="the name"')
       expect(result).not.toBeNull()
     })
 
     it('should return endpoint when method and url matches regardless of querystring', () => {
-      const result = mockServer.findEndpoint('GET', '/api/user/5')
+      const result = mockServer.findEndpoint('GET', 'http://localhost/api/user/5')
       expect(result).not.toBeNull()
     })
   })
@@ -52,7 +53,6 @@ describe('MockServer', () => {
         newResponse.rules = [
           {
             enabled: true,
-            id: 1,
             type: 'param',
             path: 'id',
             operator: 'equals',
@@ -68,7 +68,6 @@ describe('MockServer', () => {
         newResponse.rules = [
           {
             enabled: true,
-            id: 1,
             type: 'param',
             path: 'id',
             operator: 'equals',
@@ -85,7 +84,6 @@ describe('MockServer', () => {
         newResponse.rules = [
           {
             enabled: true,
-            id: 1,
             type: 'header',
             path: 'Content-Type',
             operator: 'equals',
@@ -101,7 +99,6 @@ describe('MockServer', () => {
         newResponse.rules = [
           {
             enabled: true,
-            id: 1,
             type: 'header',
             path: 'Content-Type',
             operator: 'equals',
@@ -118,7 +115,6 @@ describe('MockServer', () => {
         newResponse.rules = [
           {
             enabled: true,
-            id: 1,
             type: 'querystring',
             path: 'name',
             operator: 'equals',
@@ -134,7 +130,6 @@ describe('MockServer', () => {
         newResponse.rules = [
           {
             enabled: true,
-            id: 1,
             type: 'querystring',
             path: 'name',
             operator: 'equals',
@@ -151,7 +146,6 @@ describe('MockServer', () => {
         newResponse.rules = [
           {
             enabled: true,
-            id: 1,
             type: 'body',
             path: 'name',
             operator: 'equals',
@@ -167,7 +161,6 @@ describe('MockServer', () => {
         newResponse.rules = [
           {
             enabled: true,
-            id: 1,
             type: 'body',
             path: 'name',
             operator: 'equals',
@@ -186,7 +179,6 @@ describe('MockServer', () => {
         newResponse.rules = [
           {
             enabled: true,
-            id: 1,
             type: 'param',
             path: 'id',
             operator: 'regex',
@@ -202,7 +194,6 @@ describe('MockServer', () => {
         newResponse.rules = [
           {
             enabled: true,
-            id: 1,
             type: 'param',
             path: 'id',
             operator: 'regex',
@@ -219,7 +210,6 @@ describe('MockServer', () => {
         newResponse.rules = [
           {
             enabled: true,
-            id: 1,
             type: 'header',
             path: 'Content-Type',
             operator: 'regex',
@@ -235,7 +225,6 @@ describe('MockServer', () => {
         newResponse.rules = [
           {
             enabled: true,
-            id: 1,
             type: 'header',
             path: 'Content-Type',
             operator: 'regex',
@@ -252,7 +241,6 @@ describe('MockServer', () => {
         newResponse.rules = [
           {
             enabled: true,
-            id: 1,
             type: 'querystring',
             path: 'name',
             operator: 'regex',
@@ -268,7 +256,6 @@ describe('MockServer', () => {
         newResponse.rules = [
           {
             enabled: true,
-            id: 1,
             type: 'querystring',
             path: 'name',
             operator: 'regex',
@@ -285,7 +272,6 @@ describe('MockServer', () => {
         newResponse.rules = [
           {
             enabled: true,
-            id: 1,
             type: 'body',
             path: 'name',
             operator: 'regex',
@@ -301,7 +287,6 @@ describe('MockServer', () => {
         newResponse.rules = [
           {
             enabled: true,
-            id: 1,
             type: 'body',
             path: 'name',
             operator: 'regex',
