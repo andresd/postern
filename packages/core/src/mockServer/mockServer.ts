@@ -1,4 +1,5 @@
 import { match } from 'node-match-path'
+import path from 'path'
 import URL from 'url-parse'
 import YAML from 'yaml'
 import { EndPoint, EntityWithId, HttpMethod, Response } from './types'
@@ -36,13 +37,15 @@ export const createEmptyEndpoint = (endpoints: EndPoint[]): EndPoint => {
 export interface MockServerData {
   endpoints: EndPoint[]
   port: number
-  forwardProxy: string | null
+  forwardProxy?: string | null
+  prefix?: string | null
 }
 
 export class MockServer {
   private _port = 3004
   private _forwardProxy: string | null = null
   private _endpointsStorage: EndPoint[] = []
+  private _prefix: string | null = ''
 
   constructor(mockServerData?: MockServerData) {
     if (!mockServerData) {
@@ -50,7 +53,18 @@ export class MockServer {
     }
     this._endpointsStorage = mockServerData.endpoints
     this._port = mockServerData.port ?? 3004
-    this._forwardProxy = mockServerData.forwardProxy
+    this._forwardProxy = mockServerData.forwardProxy ?? ''
+    this._prefix = mockServerData.prefix ?? ''
+  }
+
+  public setServerData = (mockServerData?: MockServerData) => {
+    if (!mockServerData) {
+      return
+    }
+    this._endpointsStorage = mockServerData.endpoints
+    this._port = mockServerData.port ?? 3004
+    this._forwardProxy = mockServerData.forwardProxy ?? ''
+    this._prefix = mockServerData.prefix ?? ''
   }
 
   public getServerData = (): MockServerData => ({
@@ -73,6 +87,14 @@ export class MockServer {
 
   public set forwardProxy(proxy: string | null) {
     this._forwardProxy = proxy
+  }
+
+  public get prefix(): string {
+    return this._prefix ?? ''
+  }
+
+  public set prefix(prefix: string) {
+    this._prefix = prefix
   }
 
   public get endpoints(): EndPoint[] {
@@ -124,7 +146,7 @@ export class MockServer {
       this.addEndpoint(endpoint)
     })
     mockServer.port && (this._port = mockServer.port)
-    this._forwardProxy = mockServer.forwardProxy
+    this._forwardProxy = mockServer.forwardProxy ?? ''
   }
 
   public exportToYaml = () => {
@@ -152,6 +174,14 @@ export class MockServer {
     return false
   }
 
+  private trimPath = (path: string): string => {
+    return path.replace(/^\/+|\/+$/g, '')
+  }
+
+  private joinPaths = (...paths: string[]): string => {
+    return '/' + paths.map(path => this.trimPath(path)).filter(path => path !== '').join('/')
+  }
+
   public findEndpoint = (method: HttpMethod, url: string): EndPoint | null => {
     const parse = new URL(url, true)
     const endpoint = this._endpointsStorage
@@ -161,7 +191,7 @@ export class MockServer {
         }
         // Validate paths matches
         const pathname = parse.pathname
-        const endpointPath = `/api/${endpoint.path[0] === '/' ? endpoint.path.substring(1) : endpoint.path}`
+        const endpointPath = this.joinPaths('/', this._prefix ?? '', endpoint.path)
         const pathMatches = match(endpointPath, pathname)
 
         if (!pathMatches.matches) {
@@ -183,21 +213,23 @@ export class MockServer {
       const pathMatches = match(endpointPath, pathname)
 
       // Validate endpoint rules
-      const rulesValid = response.rules.every(rule => {
-        if (rule.type === 'header') {
-          return this.ruleCompare(headers[rule.path], rule)
-        }
-        if (rule.type === 'querystring') {
-          return this.ruleCompare(parse.query[rule.path], rule)
-        }
-        if (rule.type === 'body') {
-          return rule.path ? this.ruleCompare(body[rule.path], rule) : this.ruleCompare(body, rule)
-        }
-        if (rule.type === 'param') {
-          return this.ruleCompare(pathMatches.params?.[rule.path], rule)
-        }
-        return false
-      }, true)
+      const rulesValid = response.rules
+        ? response.rules.every(rule => {
+          if (rule.type === 'header') {
+            return this.ruleCompare(headers[rule.path], rule)
+          }
+          if (rule.type === 'querystring') {
+            return this.ruleCompare(parse.query[rule.path], rule)
+          }
+          if (rule.type === 'body') {
+            return rule.path ? this.ruleCompare(body[rule.path], rule) : this.ruleCompare(body, rule)
+          }
+          if (rule.type === 'param') {
+            return this.ruleCompare(pathMatches.params?.[rule.path], rule)
+          }
+          return false
+        }, true)
+        : true // No rules, so it's valid
 
       return rulesValid ? response : undefined
     })
