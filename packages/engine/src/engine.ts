@@ -102,6 +102,8 @@ app.all(/(?!.*?postern)^.*$/, (req, res) => {
           terminal.info(`Response: ${getPrettyJson(body)} `)
 
           res.status(response?.statusCode ?? 200).send(getSafeJson(body))
+        } else {
+          res.status(510).send('No response found')
         }
       }
       processed = true

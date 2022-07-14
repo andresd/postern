@@ -157,7 +157,7 @@ export class MockServer {
   private ruleCompare = (value: string | null | undefined, rule): boolean => {
     switch (rule.operator) {
       case 'any':
-        return true
+        return value !== undefined
       case 'equals':
         return value === rule.value
       case 'contains':
@@ -213,23 +213,21 @@ export class MockServer {
       const pathMatches = match(endpointPath, pathname)
 
       // Validate endpoint rules
-      const rulesValid = response.rules
-        ? response.rules.every(rule => {
-          if (rule.type === 'header') {
-            return this.ruleCompare(headers[rule.path], rule)
-          }
-          if (rule.type === 'querystring') {
-            return this.ruleCompare(parse.query[rule.path], rule)
-          }
-          if (rule.type === 'body') {
-            return rule.path ? this.ruleCompare(body[rule.path], rule) : this.ruleCompare(body, rule)
-          }
-          if (rule.type === 'param') {
-            return this.ruleCompare(pathMatches.params?.[rule.path], rule)
-          }
-          return false
-        }, true)
-        : true // No rules, so it's valid
+      const rulesValid = response.rules?.every(rule => {
+        if (rule.type === 'header') {
+          return this.ruleCompare(headers[rule.path], rule)
+        }
+        if (rule.type === 'querystring') {
+          return this.ruleCompare(parse.query[rule.path], rule)
+        }
+        if (rule.type === 'body') {
+          return rule.path ? this.ruleCompare(body[rule.path], rule) : this.ruleCompare(body, rule)
+        }
+        if (rule.type === 'param') {
+          return this.ruleCompare(pathMatches.params?.[rule.path], rule)
+        }
+        return false
+      })
 
       return rulesValid ? response : undefined
     })
