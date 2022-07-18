@@ -160,6 +160,8 @@ export class MockServer {
         return value !== undefined
       case 'equals':
         return value === rule.value
+      case 'not':
+        return value !== rule.value
       case 'contains':
         return (value as string)?.includes(rule.value)
       case 'regex':
@@ -209,7 +211,7 @@ export class MockServer {
     const response = endpoint.responses?.find(response => {
       // Validate paths matches
       const pathname = parse.pathname
-      const endpointPath = `/api/${endpoint.path[0] === '/' ? endpoint.path.substring(1) : endpoint.path}`
+      const endpointPath = this.joinPaths('/', this._prefix ?? '', endpoint.path)
       const pathMatches = match(endpointPath, pathname)
 
       // Validate endpoint rules
@@ -228,7 +230,6 @@ export class MockServer {
         }
         return false
       })
-
 
       return rulesValid ? response : undefined
     })

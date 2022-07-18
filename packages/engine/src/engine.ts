@@ -1,4 +1,4 @@
-import { chalky, HttpMethod, methodColor, MockServer, terminal } from '@postern/core'
+import { chalky, HttpMethod, methodColor, MockServer, terminal, TerminalLog } from '@postern/core'
 import cors from 'cors'
 import express from 'express'
 import http from 'http'
@@ -11,6 +11,10 @@ const app = express()
 app.use(cors())
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+
+const terminalLogs: TerminalLog[] = []
+
+terminal.setOutputMethod((log: TerminalLog) => { terminalLogs.push(log) })
 
 let currentServer: MockServer
 
@@ -52,11 +56,19 @@ const colors = {
   OPTIONS: (text: string) => chalky.frColor('#fff').bgColor(methodColor.OPTIONS).toString(text)
 }
 
+app.get('/postern/live', (req, res) => {
+  res.status(200).send({ isLive: true })
+})
+
 app.post('/postern/restart', (req, res) => {
   const oldPort = currentServer.port
   currentServer.setServerData(req.body?.server)
   terminal.info(`Server data was updated, will remain in port ${oldPort} until server is updated`)
   res.status(200).send({ status: true })
+})
+
+app.get('/postern/logs', (req, res) => {
+  res.status(200).send({ logs: terminalLogs })
 })
 
 app.all(/(?!.*?postern)^.*$/, (req, res) => {

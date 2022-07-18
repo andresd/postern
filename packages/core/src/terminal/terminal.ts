@@ -12,7 +12,6 @@ export type TerminalLog = {
 export type Level = 'debug' | 'info' | 'warn' | 'error' | 'log'
 export type OutputMethod = (log: TerminalLog) => void
 
-
 class Terminal {
   private outputMethod?: OutputMethod
 
