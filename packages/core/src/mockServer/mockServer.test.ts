@@ -41,7 +41,7 @@ describe('MockServer', () => {
     const newEndpoint = createEmptyEndpoint(mockServer.endpoints)
 
     newEndpoint.method = 'GET'
-    newEndpoint.path = '/user/:id'
+    newEndpoint.path = '/api/user/:id'
     mockServer.addEndpoint(newEndpoint)
     const firstResponse = createEmptyResponse(newEndpoint)
     firstResponse.statusCode = 200
@@ -83,7 +83,6 @@ describe('MockServer', () => {
         const result = mockServer.getValidResponse(newEndpoint, '/api/user/5', {}, {})
         expect(result).not.toBeNull()
       })
-
       it('should return null when header do not match equal rule', () => {
         firstResponse.rules = [
           {
@@ -114,7 +113,6 @@ describe('MockServer', () => {
         const result = mockServer.getValidResponse(newEndpoint, '/api/user/5', { 'Content-Type': 'application/json' }, {})
         expect(result).not.toBeNull()
       })
-
       it('should return null when qs do not match equal rule', () => {
         firstResponse.rules = [
           {
@@ -145,7 +143,6 @@ describe('MockServer', () => {
         const result = mockServer.getValidResponse(newEndpoint, '/api/user/5?name=the%20name', {}, {})
         expect(result).not.toBeNull()
       })
-
       it('should return null when body do not match equal rule', () => {
         firstResponse.rules = [
           {
@@ -209,7 +206,6 @@ describe('MockServer', () => {
         const result = mockServer.getValidResponse(newEndpoint, '/api/user/5', {}, {})
         expect(result).not.toBeNull()
       })
-
       it('should return null when header do not match equal rule', () => {
         firstResponse.rules = [
           {
@@ -240,7 +236,6 @@ describe('MockServer', () => {
         const result = mockServer.getValidResponse(newEndpoint, '/api/user/5', { 'Content-Type': 'application/json' }, {})
         expect(result).not.toBeNull()
       })
-
       it('should return null when qs do not match equal rule', () => {
         firstResponse.rules = [
           {
@@ -271,7 +266,6 @@ describe('MockServer', () => {
         const result = mockServer.getValidResponse(newEndpoint, '/api/user/5?name=the%20name', {}, {})
         expect(result).not.toBeNull()
       })
-
       it('should return null when body do not match equal rule', () => {
         firstResponse.rules = [
           {
@@ -302,6 +296,9 @@ describe('MockServer', () => {
         const result = mockServer.getValidResponse(newEndpoint, '/api/user/5?name=the%20name', {}, { name: 'the name' })
         expect(result).not.toBeNull()
       })
+    })
+
+    describe('test qs rules', () => {
       it('should return response when body qs has field with any value', () => {
         firstResponse.rules = [
           {
@@ -315,10 +312,9 @@ describe('MockServer', () => {
         newEndpoint.responses = [firstResponse, secondResponse]
         mockServer.setEndpoint(newEndpoint)
         const result = mockServer.getValidResponse(newEndpoint, '/api/user/5?test=1', {}, {})
-        console.log(result)
         expect(result).not.toBeNull()
       })
-      it('should return null when qs has incorrect field', () => {
+      it('should return null when qs has param not found', () => {
         firstResponse.rules = [
           {
             enabled: true,
@@ -331,23 +327,60 @@ describe('MockServer', () => {
         newEndpoint.responses = [firstResponse]
         mockServer.setEndpoint(newEndpoint)
         const result = mockServer.getValidResponse(newEndpoint, '/api/user/5?tst=1', {}, {})
-        console.log(result)
         expect(result).toBeNull()
       })
-      it('should return second ruleless response when qs has incorrect field', () => {
+      it('should return second ruleless response when qs param has incorrect value', () => {
         firstResponse.rules = [
           {
             enabled: true,
             type: 'querystring',
             path: 'test',
-            operator: 'any',
-            value: 'any'
+            operator: 'equals',
+            value: '1234'
           }
         ]
         newEndpoint.responses = [firstResponse, secondResponse]
         mockServer.setEndpoint(newEndpoint)
-        const result = mockServer.getValidResponse(newEndpoint, '/api/user/5?tst=1', {}, {})
-        console.log(result)
+        const result = mockServer.getValidResponse(newEndpoint, '/api/user/5?test=1', {}, {})
+        expect(result?.statusCode).toBe(400)
+      })
+      it('should return second response (ruleless) when first don\'t match first rule (qs equals values)', () => {
+        firstResponse.rules = [
+          {
+            enabled: true,
+            type: 'querystring',
+            path: 'test',
+            operator: 'equals',
+            value: '1234'
+          }
+        ]
+        newEndpoint.responses = [firstResponse, secondResponse]
+        mockServer.setEndpoint(newEndpoint)
+        const result = mockServer.getValidResponse(newEndpoint, '/api/user/5?test=1&name=fff', {}, {})
+        expect(result?.statusCode).toBe(400)
+      })
+      it('should return match second response rule (qs equals values)', () => {
+        firstResponse.rules = [
+          {
+            enabled: true,
+            type: 'querystring',
+            path: 'test',
+            operator: 'equals',
+            value: '1234'
+          }
+        ]
+        secondResponse.rules = [
+          {
+            enabled: true,
+            type: 'querystring',
+            path: 'test',
+            operator: 'equals',
+            value: '1235'
+          }
+        ]
+        newEndpoint.responses = [firstResponse, secondResponse]
+        mockServer.setEndpoint(newEndpoint)
+        const result = mockServer.getValidResponse(newEndpoint, '/api/user/5?test=1235&name=fff', {}, {})
         expect(result?.statusCode).toBe(400)
       })
     })

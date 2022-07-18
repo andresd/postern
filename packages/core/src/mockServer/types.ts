@@ -15,7 +15,7 @@ export const methodColor = {
 export const httpMethod = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD', 'OPTIONS'] as const
 export type HttpMethod = typeof httpMethod[number]
 
-export type RuleOperator = 'equals' | 'contains' | 'regex' | 'null' | 'empty' | 'any'
+export type RuleOperator = 'equals' | 'not' | 'contains' | 'regex' | 'null' | 'empty' | 'any'
 
 export interface Rule {
   enabled: boolean
