@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { startServer } from '@postern/engine'
 import process from 'process'
 import fs from 'fs'

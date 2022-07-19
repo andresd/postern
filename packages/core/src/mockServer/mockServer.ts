@@ -23,6 +23,7 @@ export const createEmptyResponse = (endpoint: EndPoint): Response => {
 export const createEmptyEndpoint = (endpoints: EndPoint[]): EndPoint => {
   const newEndpoint = {
     id: getNewId(endpoints),
+    isActive: true,
     name: 'Empty endpoint',
     path: 'user/:id',
     method: 'GET',
@@ -188,6 +189,9 @@ export class MockServer {
     const parse = new URL(url, true)
     const endpoint = this._endpointsStorage
       .find((endpoint) => {
+        if (!endpoint.isActive) {
+          return undefined
+        }
         if (endpoint.method !== method) {
           return undefined
         }
