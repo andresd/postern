@@ -26,6 +26,7 @@ export interface Rule {
 }
 export interface EndPoint extends EntityWithId {
   description?: string,
+  isActive: boolean,
   path: string,
   method: HttpMethod,
   redirectEnabled?: boolean,
