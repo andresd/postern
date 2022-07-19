@@ -6,7 +6,7 @@ import { match } from 'node-match-path'
 import URL from 'url-parse'
 import { generateBody } from './templateManager'
 
-const app = express()
+export const app = express()
 
 app.use(cors())
 app.use(express.json()) // for parsing application/json
