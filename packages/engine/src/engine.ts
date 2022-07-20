@@ -57,17 +57,25 @@ const colors = {
 }
 
 app.get('/postern/live', (req, res) => {
+  res.header('Content-Type', 'application/json')
   res.status(200).send({ isLive: true })
+})
+
+app.get('/postern/config', (req, res) => {
+  res.header('Content-Type', 'application/json')
+  res.status(200).send({ serverData: currentServer.getServerData() })
 })
 
 app.post('/postern/restart', (req, res) => {
   const oldPort = currentServer.port
   currentServer.setServerData(req.body?.server)
   terminal.info(`Server data was updated, will remain in port ${oldPort} until server is updated`)
+  res.header('Content-Type', 'application/json')
   res.status(200).send({ status: true })
 })
 
 app.get('/postern/logs', (req, res) => {
+  res.header('Content-Type', 'application/json')
   res.status(200).send({ logs: terminalLogs })
 })
 

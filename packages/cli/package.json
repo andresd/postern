@@ -1,7 +1,7 @@
 {
   "name": "@postern/cli",
   "productName": "Postern cli",
-  "version": "1.0.11",
+  "version": "1.0.14",
   "description": "Postern Mock API Tool cli for testing",
   "private": false,
   "license": "MIT",
@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "@postern/core": "0.0.23",
-    "@postern/engine": "0.0.18",
+    "@postern/engine": "0.0.21",
     "yargs": "^17.5.1"
   }
 }
