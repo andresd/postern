@@ -1,5 +1,6 @@
 import { match } from 'node-match-path'
 import path from 'path'
+import { terminal } from '../terminal'
 import URL from 'url-parse'
 import YAML from 'yaml'
 import { EndPoint, EntityWithId, HttpMethod, Response } from './types'
@@ -219,7 +220,8 @@ export class MockServer {
       const pathMatches = match(endpointPath, pathname)
 
       // Validate endpoint rules
-      const rulesValid = response.rules?.every(rule => {
+      const rules = response.rules ?? []
+      const rulesValid = rules.every(rule => {
         if (rule.type === 'header') {
           return this.ruleCompare(headers[rule.path], rule)
         }

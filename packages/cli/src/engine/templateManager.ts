@@ -1,19 +1,19 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { faker } from '@faker-js/faker'
-import { Response } from '@postern/core'
+import { Response } from '../core/index'
 import Handlebars, { HelperDelegate } from 'handlebars'
 import { countries } from './countries'
 
 const vars = {}
 
 Handlebars.registerHelper('faker', (text: string) => {
-  return faker.fake(`{{${text}}}`)
+  return faker.helpers.fake(`{{${text}}}`)
 })
 
 Handlebars.registerHelper('setvar', (text: string) => {
   const [name, value] = text.split('=')
-  vars[name] = faker.fake(`{{${value}}}`)
+  vars[name] = faker.helpers.fake(`{{${value}}}`)
   return ''
 })
 

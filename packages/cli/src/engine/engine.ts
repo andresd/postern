@@ -1,4 +1,4 @@
-import { chalky, HttpMethod, methodColor, MockServer, terminal, TerminalLog } from '@postern/core'
+import { chalky, HttpMethod, methodColor, MockServer, terminal, TerminalLog } from '../core/index'
 import cors from 'cors'
 import express from 'express'
 import http from 'http'
@@ -155,7 +155,7 @@ export const startServer = (mockServer: MockServer) => {
   app.disable('x-powered-by')
   app.disable('etag')
   server = app.listen(port, () => {
-    const message = `Server listening on port ${port} `
+    const message = `Server listening on port ${port}`
     terminal.info(message)
   })
 }
