@@ -28,10 +28,6 @@
     "list:stage": "yarn eslint . --rule \"no-console: [\"error\", { allow: [\"info\", \"warn\", \"error\"] }]\""
   },
   "dependencies": {},
-  "pre-push": [
-    "lint",
-    "test"
-  ],
   "pre-commit": [
     "list:stage"
   ]
