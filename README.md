@@ -6,7 +6,7 @@ Postern a tool for mocking API's locally for frontend development and testing.
 
 - CLI to run Postern server.
   `npx @postern/cli -f [config file] -p [port]`
-- configuration editor and server dashboard https://app.postern.co/
+- configuration editor and server dashboard <https://app.postern.co/>
 - Endpoint redirecting
 - Redirect/forward unknown endpoints.
 - Engine npm package to integrate Postern server in other solutions.

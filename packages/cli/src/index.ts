@@ -1,8 +1,8 @@
 #!/usr/bin/env node
-import { startServer } from '@postern/engine'
+import { startServer } from './engine'
 import process from 'process'
 import fs from 'fs'
-import { MockServer } from '@postern/core'
+import { MockServer } from './core/mockServer'
 import yargs from 'yargs'
 
 const argv = yargs(process.argv.slice(2))

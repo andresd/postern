@@ -31,11 +31,11 @@
     "noEmit": false,
     "jsx": "react-jsx",
     "paths": {
-      "@postern/core": [
-        "../core/src/*"
+      "@core/*": [
+        "src/core/*"
       ],
-      "@postern/engine": [
-        "../engine/src/*"
+      "@engine/*": [
+        "src/engine/*"
       ],
       "*": [
         "./node_modules/*"
