@@ -48,6 +48,7 @@ class Terminal {
       this.outputMethod(log)
     }
 
+    // eslint-disable-next-line no-console
     console[level](timestamp, ...args)
   }
 }

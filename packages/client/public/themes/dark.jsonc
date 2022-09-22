@@ -1,0 +1,315 @@
+{
+  "transparent": "transparent",
+  "black": "#000",
+  "white": "#fff",
+  "grey": {
+    "100": "#020F20",
+    "90": "#1B2726",
+    "80": "#353F3D",
+    "70": "#4E5753",
+    "60": "#676F69",
+    "50": "#84878F",
+    "40": "#9A9F96",
+    "30": "#B3B7BC",
+    "20": "#CCCFC2",
+    "10": "#E6E7E9"
+  },
+  "blue": {
+    "100": "#18357C",
+    "90": "#2F4989",
+    "80": "#465D96",
+    "70": "#5D72A3",
+    "60": "#7486B0",
+    "50": "#8B9ABE",
+    "40": "#A3AECB",
+    "30": "#BAC2D8",
+    "20": "#D1D7E5",
+    "10": "#E8EBF2"
+  },
+  "green": {
+    "100": "#3F9752",
+    "90": "#4AB261",
+    "80": "#6EC181",
+    "70": "#80C990",
+    "60": "#92D1A0",
+    "50": "#A4D8B0",
+    "40": "#B7E0C0",
+    "30": "#C9E8D0",
+    "20": "#DBF0DF",
+    "10": "#EDF7EF"
+  },
+  "yellow": {
+    "100": "#CF9F00",
+    "90": "#F3BB00",
+    "80": "#F6C833",
+    "70": "#F7CF4C",
+    "60": "#F8D666",
+    "50": "#F9DD80",
+    "40": "#FAE499",
+    "30": "#FCEBB3",
+    "20": "#FDF1CC",
+    "10": "#FEF8E6"
+  },
+  "orange": {
+    "100": "#D97807",
+    "90": "#FF8B02",
+    "80": "#FFA235",
+    "70": "#FFAE4E",
+    "60": "#FFB967",
+    "50": "#FFC580",
+    "40": "#FFD09A",
+    "30": "#FFDCB3",
+    "20": "#FFE8CC",
+    "10": "#FFF3E6"
+  },
+  "red": {
+    "100": "#D10133",
+    "90": "#EA0038",
+    "80": "#EE3360",
+    "70": "#F04D74",
+    "60": "#F26688",
+    "50": "#F4809C",
+    "40": "#F799AF",
+    "30": "#F9B3C3",
+    "20": "#FBCCD7",
+    "10": "#FDE6EB"
+  },
+  "lightBlue": {
+    "100": "#2D8DE7",
+    "90": "#4CA9FF",
+    "80": "#70BAFF",
+    "70": "#82C3FF",
+    "60": "#94CBFF",
+    "50": "#A5D4FF",
+    "40": "#B7DDFF",
+    "30": "#C9E5FF",
+    "20": "#DBEEFF",
+    "10": "#EDF6FF"
+  },
+  // Primaries
+  "primaryColor1": "ref#grey.80",
+  "primaryColor2": "ref#grey.60",
+  "primaryColor3": "ref#white",
+  "primaryColor4": "ref#grey.20",
+  // Button Brand Primary style
+  "buttonDefaultPrimarySpinnerColor": "ref#white",
+  "buttonDefaultPrimaryDefaultBackground": "ref#blue.70",
+  "buttonDefaultPrimaryDefaultColor": "ref#white",
+  "buttonDefaultPrimaryHoverBackground": "ref#blue.80",
+  "buttonDefaultPrimaryHoverColor": "ref#white",
+  "buttonDefaultPrimaryDisabledBackground": "ref#grey.10",
+  "buttonDefaultPrimaryDisabledColor": "ref#grey.30",
+  "buttonDefaultPrimaryLoadingBackground": "ref#blue.70",
+  "buttonDefaultPrimaryLoadingColor": "ref#white",
+  // Button Brand Secondary style
+  "buttonDefaultSecondarySpinnerColor": "ref#grey.40",
+  "buttonDefaultSecondaryDefaultBackground": "ref#transparent",
+  "buttonDefaultSecondaryDefaultColor": "ref#grey.40",
+  "buttonDefaultSecondaryDefaultBorderColor": "ref#grey.40",
+  "buttonDefaultSecondaryHoverBackground": "ref#grey.10",
+  "buttonDefaultSecondaryHoverColor": "ref#grey.50",
+  "buttonDefaultSecondaryHoverBorderColor": "ref#grey.40",
+  "buttonDefaultSecondaryDisabledBackground": "ref#transparent",
+  "buttonDefaultSecondaryDisabledColor": "ref#grey.10",
+  "buttonDefaultSecondaryDisabledBorderColor": "ref#grey.10",
+  "buttonDefaultSecondaryLoadingBackground": "ref#transparent",
+  "buttonDefaultSecondaryLoadingColor": "ref#grey.40",
+  "buttonDefaultSecondaryLoadingBorderColor": "ref#grey.40",
+  // Button Brand Tertiary style
+  "buttonDefaultTertiarySpinnerColor": "ref#grey.40",
+  "buttonDefaultTertiaryDefaultBackground": "ref#transparent",
+  "buttonDefaultTertiaryDefaultColor": "ref#grey.40",
+  // "buttonDefaultTertiaryDefaultBorderColor": "ref#transparent",
+  "buttonDefaultTertiaryHoverBackground": "ref#grey.20",
+  "buttonDefaultTertiaryHoverColor": "ref#grey.50",
+  // "buttonDefaultTertiaryHoverBorderColor": "",
+  "buttonDefaultTertiaryDisabledBackground": "ref#transparent",
+  "buttonDefaultTertiaryDisabledColor": "ref#grey.10",
+  // "buttonDefaultTertiaryDisabledBorderColor": "ref#transparent",
+  "buttonDefaultTertiaryLoadingBackground": "ref#transparent",
+  "buttonDefaultTertiaryLoadingColor": "ref#grey.40",
+  // "buttonDefaultTertiaryLoadingBorderColor": "ref#transparent",
+  // Button Destructive Primary style
+  "buttonDestructivePrimarySpinnerColor": "ref#white",
+  "buttonDestructivePrimaryDefaultBackground": "ref#red.80",
+  "buttonDestructivePrimaryDefaultColor": "ref#white",
+  "buttonDestructivePrimaryHoverBackground": "ref#red.100",
+  "buttonDestructivePrimaryHoverColor": "ref#white",
+  "buttonDestructivePrimaryDisabledBackground": "ref#grey.70",
+  "buttonDestructivePrimaryDisabledColor": "ref#grey.90",
+  "buttonDestructivePrimaryLoadingBackground": "ref#red.80",
+  "buttonDestructivePrimaryLoadingColor": "ref#white",
+  // Button Destructive Secondary style
+  "buttonDestructiveSecondarySpinnerColor": "ref#red.80",
+  "buttonDestructiveSecondaryDefaultBackground": "ref#transparent",
+  "buttonDestructiveSecondaryDefaultColor": "ref#red.80",
+  "buttonDestructiveSecondaryDefaultBorderColor": "ref#red.80",
+  "buttonDestructiveSecondaryHoverBackground": "ref#red.20",
+  "buttonDestructiveSecondaryHoverColor": "ref#red.80",
+  "buttonDestructiveSecondaryHoverBorderColor": "ref#red.80",
+  "buttonDestructiveSecondaryDisabledBackground": "ref#transparent",
+  "buttonDestructiveSecondaryDisabledColor": "ref#grey.70",
+  "buttonDestructiveSecondaryDisabledBorderColor": "ref#grey.70",
+  "buttonDestructiveSecondaryLoadingBackground": "ref#transparent",
+  "buttonDestructiveSecondaryLoadingColor": "ref#red.80",
+  "buttonDestructiveSecondaryLoadingBorderColor": "ref#red.80",
+  // Button Destructive Tertiary style
+  "buttonDestructiveTertiarySpinnerColor": "ref#red.80",
+  "buttonDestructiveTertiaryDefaultBackground": "ref#transparent",
+  "buttonDestructiveTertiaryDefaultColor": "ref#red.80",
+  "buttonDestructiveTertiaryDefaultBorderColor": "",
+  "buttonDestructiveTertiaryHoverBackground": "ref#red.30",
+  "buttonDestructiveTertiaryHoverColor": "ref#red.80",
+  "buttonDestructiveTertiaryHoverBorderColor": "",
+  "buttonDestructiveTertiaryDisabledBackground": "ref#transparent",
+  "buttonDestructiveTertiaryDisabledColor": "ref#grey.70",
+  "buttonDestructiveTertiaryDisabledBorderColor": "",
+  "buttonDestructiveTertiaryLoadingBackground": "ref#transparent",
+  "buttonDestructiveTertiaryLoadingColor": "ref#red.80",
+  "buttonDestructiveTertiaryLoadingBorderColor": "",
+  // Dropdown
+  "dropDown": {
+    "primary": {
+      "label": {
+        "color": "ref#grey.20",
+        "background": "ref#transparent"
+      },
+      "chevronColor": "#7486B0",
+      "header": {
+        "borderColor": "#7486B0",
+        "BorderFocusColor": "#2D8DE7",
+        "background": "#fff",
+        "color": "#4E5763"
+      },
+      "contentPanel": {
+        "borderColor": "ref#transparent",
+        "boxShadow": "0px 0px 18px rgba(28, 29, 33, 0.12), 0px 6px 6px rgba(28, 29, 33, 0.06)",
+        "background": "#fff",
+        "color": "#fff"
+      },
+      "item": {
+        "background": "#fff",
+        "color": "#1C1D21",
+        "hover": {
+          "background": "#A3AECB",
+          "color": "#fff"
+        }
+      }
+    }
+  },
+  // Input..
+  "input": {
+    "label": {
+      "color": "ref#grey.20",
+      "background": "ref#transparent"
+    },
+    "default": {
+      "borderColor": "ref#blue.40",
+      "background": "ref#white",
+      "color": "ref#grey.90",
+      "outlineHoverColor": "ref#blue.80",
+      "outlineFocusColor": "ref#lightBlue.100",
+      "prefixIcon": "ref#grey.60",
+      "suffixIcon": "ref#grey.60",
+      "placeholderColor": "ref#grey.70"
+    },
+    "readOnly": {
+      "borderColor": "ref#transparent",
+      "background": "ref#blue.10",
+      "color": "ref#blue.50",
+      "outlineColor": "ref#transparent",
+      "prefixIcon": "ref#blue.50",
+      "suffixIcon": "ref#blue.50",
+      "placeholderColor": "ref#blue.50"
+    },
+    "error": {
+      "borderColor": "ref#red.90",
+      "background": "ref#white",
+      "color": "ref#grey.90",
+      "outlineColor": "ref#red.90",
+      "prefixIcon": "ref#grey.60",
+      "suffixIcon": "ref#grey.60",
+      "placeholderColor": "ref#grey.70",
+      "rowColor": "ref#red.90",
+      "rowIconColor": "ref#red.90"
+    }
+  },
+  // Checkbox
+  "checkbox": {
+    "label": {
+      "background": "ref#transparent",
+      "color": "ref#white"
+    },
+    "checked": {
+      "default": {
+        "background": "ref#lightBlue.90",
+        "iconColor": "ref#white",
+        "borderColor": "ref#transparent",
+        "outlineColor": "ref#transparent"
+      },
+      "focused": {
+        "background": "ref#lightBlue.100",
+        "iconColor": "ref#white",
+        "borderColor": "ref#transparent",
+        "outlineColor": "ref#lightBlue.40"
+      },
+      "hover": {
+        "background": "ref#lightBlue.100",
+        "iconColor": "ref#white",
+        "borderColor": "ref#transparent",
+        "outlineColor": "ref#transparent"
+      },
+      "disabled": {
+        "background": "ref#grey.70",
+        "iconColor": "ref#white",
+        "borderColor": "ref#transparent",
+        "outlineColor": "ref#transparent"
+      }
+    },
+    "unchecked": {
+      "default": {
+        "background": "ref#grey.10",
+        "iconColor": "ref#transparent",
+        "borderColor": "ref#lightBlue.90",
+        "outlineColor": "ref#transparent"
+      },
+      "focused": {
+        "background": "ref#grey.10",
+        "iconColor": "ref#transparent",
+        "borderColor": "ref#lightBlue.50",
+        "outlineColor": "ref#lightBlue.40"
+      },
+      "hover": {
+        "background": "ref#grey.10",
+        "iconColor": "ref#transparent",
+        "borderColor": "ref#lightBlue.50",
+        "outlineColor": "ref#transparent"
+      },
+      "disabled": {
+        "background": "ref#grey.50",
+        "iconColor": "ref#transparent",
+        "borderColor": "ref#grey.70",
+        "outlineColor": "ref#transparent"
+      }
+    }
+  },
+  // Tooltip
+  "tooltip": {
+    "background": "ref#grey.90",
+    "color": "ref#white"
+  },
+  "info": {
+    "iconColor": "ref#grey.10"
+  },
+  // Endpoint List
+  "endpointListBackgroundColor": "ref#grey.80",
+  "endpointListColor": "ref#white",
+  "endpointListItemBackgroundColor": "ref#grey.70",
+  "endpointListItemColor": "ref#white",
+  // Endpoint Details
+  "endpointDetailsMainBackgroundColor": "ref#grey.80",
+  "endpointDetailsSubBackgroundColor": "ref#grey.80",
+  "endpointDetailsActiveTabBackgroundColor": "ref#blue.70",
+  "endpointDetailsTabBackgroundColor": "ref#grey.70",
+  "endpointDetailsColor": "ref#white"
+}
