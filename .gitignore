@@ -92,5 +92,3 @@ out/
 # vscode
 .history/
 .vscode/
-
-yarn.lock
