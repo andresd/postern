@@ -2,7 +2,7 @@ export const getUniqueNumber = (base = 36, length = undefined) => Math.random().
 
 export const emptyImage = '/images/emptyImage.png'
 
-export function filter<T>(raw: T, predicate: (value: any) => boolean): T {
+export function filter<T extends object>(raw: T, predicate: (value: any) => boolean): T {
   return Object.entries(raw)
     .filter(item => predicate(item[1]))
     .reduce((obj: any, item) => {
@@ -12,7 +12,7 @@ export function filter<T>(raw: T, predicate: (value: any) => boolean): T {
     }, {})
 }
 
-export function first<T, U>(raw: T, predicate: (value: U) => boolean): U {
+export function first<T extends object, U>(raw: T, predicate: (value: U) => boolean): U {
   const filtered = Object.entries(raw).filter(item => predicate(item[1]))
   return filtered.length > 0 ? filtered[0][1] : undefined
 }
