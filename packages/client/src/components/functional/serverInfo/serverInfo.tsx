@@ -1,6 +1,5 @@
 import { useStyles } from '@components/hooks'
 import { Button, Icon, Input, Tooltip } from '@components/primitives'
-import { Flags } from '@lib/flags'
 import { getUrlParts } from '@lib/utils'
 import { isServerLive } from '@state/server/actions'
 import { autoSyncServerState, serverHostState, serverPortState, updateServerDataFromRemoteStateCacheCallback, updateServerDataStateCacheCallback } from '@state/server/atoms'
@@ -11,25 +10,6 @@ import { ForwardingProxyInput } from '../forwardingProxyInput'
 import { styles } from './styles'
 
 type ServerInfoProps = HTMLAttributes<HTMLDivElement>
-
-const AdvanceMode = () => {
-  const style = useStyles(styles)
-
-  const setPort = useSetRecoilState(serverPortState)
-  const [serverHost, setServerHost] = useRecoilState(serverHostState)
-
-  useEffect(() => {
-    if (serverHost) {
-      setPort(getUrlParts(serverHost).port)
-    }
-  }, [serverHost])
-
-  return (
-    <>
-      <Input containerClassName={style.host} placeholder={'Host: http://localhost:3004'} value={serverHost} onChange={event => setServerHost(event.target.value)} />
-    </>
-  )
-}
 
 const SimpleMode = () => {
   const style = useStyles(styles)
@@ -107,9 +87,7 @@ export const ServerInfo = (props: ServerInfoProps) => {
       <Tooltip content={'Update server configuration data'} placement={'bottom'}>
         <Button onClick={handleUploadToServer} disabled={!isLive}><Icon name={'upload'} /></Button>
       </Tooltip>
-      <Flags authorizedFlags={['admin', 'sub']} renderOff={() => <SimpleMode />}>
-        <AdvanceMode />
-      </Flags>
+      <SimpleMode />
     </div>
   )
 }
