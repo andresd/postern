@@ -1,5 +1,5 @@
 import { useStyles } from '@components/hooks'
-import { EndPoint, methodColor } from '@postern/core'
+import { EndPoint, methodColor } from '@postern/cli/dist/core'
 import type { Identifier, XYCoord } from 'dnd-core'
 import { HTMLAttributes, useRef } from 'react'
 import { useDrag, useDrop } from 'react-dnd'

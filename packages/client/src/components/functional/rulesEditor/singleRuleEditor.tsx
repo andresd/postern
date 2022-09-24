@@ -1,6 +1,6 @@
 import { useStyles } from '@components/hooks'
 import { Checkbox, DropDown, Input } from '@components/primitives'
-import { Rule } from '@postern/core'
+import { Rule } from '@postern/cli/dist/core'
 import { useEffect, useState } from 'react'
 import { useDebounce } from 'react-use'
 import { styles } from './styles'

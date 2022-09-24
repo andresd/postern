@@ -1,15 +1,15 @@
-import { TerminalLog } from '@postern/core'
+import { TerminalLog } from '@postern/cli/dist/core'
 import Ansi from 'ansi-to-react'
 import dayjs from 'dayjs'
 import { HTMLAttributes, LegacyRef, useEffect, useRef, useState } from 'react'
-import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil'
+import { useRecoilValue, useResetRecoilState } from 'recoil'
 import { styles } from './styles'
 
-import { isTerminalPausedState, terminalLogState } from '@state/terminal/atoms'
-import LocalizedFormat from 'dayjs/plugin/localizedFormat'
 import { Button, Icon } from '@components/primitives'
-import { autoSyncServerState, serverHostState } from '@state/server/atoms'
 import { getTerminalLogs } from '@state/server/actions'
+import { autoSyncServerState, serverHostState } from '@state/server/atoms'
+import { terminalLogState } from '@state/terminal/atoms'
+import LocalizedFormat from 'dayjs/plugin/localizedFormat'
 import { useInterval } from 'react-use'
 
 dayjs.extend(LocalizedFormat)

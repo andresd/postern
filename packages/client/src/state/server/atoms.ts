@@ -1,4 +1,4 @@
-import { EndPoint, MockServer, MockServerData } from '@postern/core'
+import { EndPoint, MockServer, MockServerData } from '@postern/cli/dist/core'
 import { atom, CallbackInterface, DefaultValue, selector } from 'recoil'
 import { getServerDataFromServer, updateServer } from './actions'
 

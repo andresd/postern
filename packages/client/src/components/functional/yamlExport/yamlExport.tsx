@@ -1,5 +1,5 @@
 import { Button, Icon, Info, Row, Tooltip } from '@components/primitives'
-import { MockServer } from '@postern/core'
+import { MockServer } from '@postern/cli/dist/core'
 import { endpointListState, forwardingProxyState, serverPortState } from '@state/server/atoms'
 import { saveAs } from 'file-saver'
 import { useRecoilValue } from 'recoil'

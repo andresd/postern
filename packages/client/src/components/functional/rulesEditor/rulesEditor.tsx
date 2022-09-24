@@ -1,6 +1,6 @@
 import { useStyles } from '@components/hooks'
 import { Button } from '@components/primitives'
-import { Rule } from '@postern/core'
+import { Rule } from '@postern/cli/dist/core'
 import { HTMLAttributes } from 'react'
 import { SingleRuleEditor } from './singleRuleEditor'
 import { styles } from './styles'
