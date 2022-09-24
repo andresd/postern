@@ -2,8 +2,7 @@
   "name": "@postern/root",
   "private": true,
   "workspaces": [
-    "packages/core",
-    "packages/engine",
+    "packages/client",
     "packages/cli"
   ],
   "devDependencies": {
