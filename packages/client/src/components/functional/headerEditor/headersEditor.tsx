@@ -1,6 +1,6 @@
 import { useStyles } from '@components/hooks'
 import { Button } from '@components/primitives'
-import { Header } from '@postern/core'
+import { Header } from '@postern/cli/dist/core'
 import { HTMLAttributes } from 'react'
 import { SingleHeaderEditor } from './singleHeaderEditor'
 import { styles } from './styles'

@@ -1,6 +1,6 @@
 import { useStyles } from '@components/hooks'
 import { Checkbox, Input } from '@components/primitives'
-import { Header } from '@postern/core'
+import { Header } from '@postern/cli/dist/core'
 import { useEffect, useState } from 'react'
 import { useDebounce } from 'react-use'
 import { styles } from './styles'

@@ -1,6 +1,6 @@
 import { Button } from '@components/primitives'
 import { Icon } from '@components/primitives/icons'
-import { terminal } from '@postern/core'
+import { terminal } from '@postern/cli/dist/core'
 import { endpointListState, selectedEndpointIndexState, serverPortState } from '@state/server/atoms'
 import { useMemo } from 'react'
 import { useRecoilValue } from 'recoil'

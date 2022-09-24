@@ -1,5 +1,5 @@
 import { Button, Info, Row } from '@components/primitives'
-import { MockServer } from '@postern/core'
+import { MockServer } from '@postern/cli/dist/core'
 import { endpointListState, forwardingProxyState, serverPortState } from '@state/server/atoms'
 import { useRef } from 'react'
 import { useSetRecoilState } from 'recoil'

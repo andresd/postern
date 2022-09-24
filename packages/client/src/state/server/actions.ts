@@ -1,5 +1,5 @@
 import { getUrlParts } from '@lib/utils'
-import { MockServerData } from '@postern/core'
+import { MockServerData } from '@postern/cli/dist/core'
 
 export const defaultServerData: MockServerData = {
   endpoints: [],
